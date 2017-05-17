@@ -54,4 +54,12 @@ public class SecondView extends TextView{
         super.onDraw(canvas);
         canvas.restore();
     }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        if(getWidth() == 0){
+
+        }
+    }
 }

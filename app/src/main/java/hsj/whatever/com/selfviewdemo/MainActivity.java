@@ -12,17 +12,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        setContentView(R.layout.second_view);
+        setContentView(R.layout.shine_textview);
 
-        findViewById(R.id.second).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new SweetAlertDialog(MainActivity.this)
-                        .setTitleText("Title")
-                        .setContentText("just show")
-                        .setConfirmText("ops")
-                        .show();
-            }
-        });
+//        findViewById(R.id.second).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new SweetAlertDialog(MainActivity.this)
+//                        .setTitleText("Title")
+//                        .setContentText("just show")
+//                        .setConfirmText("ops")
+//                        .show();
+//            }
+//        });
     }
+
 }
