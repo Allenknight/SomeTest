@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ListView;
 import android.widget.Scroller;
 
 /**
@@ -18,6 +19,8 @@ public class ScrollView extends ViewGroup{
 
     int mSceenHeight;
     private Scroller mScroller;
+
+    ListView mListview;
 
 
     public ScrollView(Context context) {
