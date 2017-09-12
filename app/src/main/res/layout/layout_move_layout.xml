@@ -1,0 +1,37 @@
+<hsj.whatever.com.selfviewdemo.MoveLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:text="I can be dragged !"
+        android:gravity="center"
+        android:background="#44ff0000"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:text="I can be dragged !"
+        android:gravity="center"
+        android:background="#44ff0000"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:text="I can be dragged !"
+        android:gravity="center"
+        android:background="#44ff0000"
+        android:layout_gravity="center"
+        />
+
+
+</hsj.whatever.com.selfviewdemo.MoveLayout>

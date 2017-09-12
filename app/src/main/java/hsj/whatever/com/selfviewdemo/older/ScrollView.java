@@ -1,4 +1,4 @@
-package hsj.whatever.com.selfviewdemo;
+package hsj.whatever.com.selfviewdemo.older;
 
 import android.content.Context;
 import android.util.AttributeSet;

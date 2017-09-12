@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"/>
 
-    <hsj.whatever.com.selfviewdemo.SelfVIew
+    <hsj.whatever.com.selfviewdemo.older.SelfVIew
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

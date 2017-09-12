@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <hsj.whatever.com.selfviewdemo.ThirdView
+    <hsj.whatever.com.selfviewdemo.older.ThirdView
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:text="My Android TextView"
