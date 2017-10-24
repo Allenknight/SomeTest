@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+<hsj.whatever.com.selfviewdemo.draghelper.DragViewGroup
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:text="menu"
+            android:layout_width="100dp"
+            android:layout_height="40dp"/>
+
+    </FrameLayout>
+    <FrameLayout
+        android:background="@android:color/holo_purple"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:text="main"
+            android:layout_width="100dp"
+            android:layout_height="40dp"/>
+
+    </FrameLayout>
+
+</hsj.whatever.com.selfviewdemo.draghelper.DragViewGroup>
+</LinearLayout>
