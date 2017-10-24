@@ -17,6 +17,14 @@
         </activity>
         <activity android:name=".Main2Activity">
         </activity>
+
+        <service android:name=".aidl.AIDLService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.tengxun.aidl"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
