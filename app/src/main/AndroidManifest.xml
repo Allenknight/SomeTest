@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".services.BindingActivity">
+        <activity android:name=".MainActivity4">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -18,13 +18,13 @@
         <activity android:name=".Main2Activity">
         </activity>
 
-        <!--<service android:name=".aidl.AIDLService"-->
-            <!--android:exported="true">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.tengxun.aidl"/>-->
-                <!--<category android:name="android.intent.category.DEFAULT"/>-->
-            <!--</intent-filter>-->
-        <!--</service>-->
+        <service android:name=".aidl.AIDLService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="hsj.whatever.com.selfviewdemo"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
         <service android:name=".services.FirstService"/>
 
     </application>

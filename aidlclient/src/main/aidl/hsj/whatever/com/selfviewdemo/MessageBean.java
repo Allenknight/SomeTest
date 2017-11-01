@@ -3,59 +3,44 @@ package hsj.whatever.com.selfviewdemo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MessageBean implements Parcelable {
-    private String content;//需求内容
-    private int level;//重要等级
+/**
+ * Created by AllenHan on 2017/11/1.
+ */
 
-    public String getContent() {
-        return content;
+public class MessageBean implements Parcelable{
+
+    private String messageContent;
+    private String messageTitle;
+
+    public MessageBean(){
+
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public String getMessageContent() {
+        return messageContent;
     }
 
-    public int getLevel() {
-        return level;
+    public void setMessageContent(String messageContent) {
+        this.messageContent = messageContent;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public String getMessageTitle(){
+        return messageTitle;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.content);
-        dest.writeInt(this.level);
-    }
-    public MessageBean() {
-    }
-
-    public void readFromParcel(Parcel dest) {
-        //注意，此处的读值顺序应当是和writeToParcel()方法中一致的
-        this.content = dest.readString();
-        this.level = dest.readInt();
-    }
-
-    public MessageBean(String content, int level) {
-        this.content = content;
-        this.level = level;
+    public void setMessageTitle(String messageTitle){
+        this.messageTitle = messageTitle;
     }
 
     protected MessageBean(Parcel in) {
-        this.content = in.readString();
-        this.level = in.readInt();
+        messageContent = in.readString();
+        messageTitle = in.readString();
     }
 
     public static final Creator<MessageBean> CREATOR = new Creator<MessageBean>() {
         @Override
-        public MessageBean createFromParcel(Parcel source) {
-            return new MessageBean(source);
+        public MessageBean createFromParcel(Parcel in) {
+            return new MessageBean(in);
         }
 
         @Override
@@ -65,7 +50,18 @@ public class MessageBean implements Parcelable {
     };
 
     @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(messageContent);
+        dest.writeString(messageTitle);
+    }
+
+    @Override
     public String toString() {
-        return "【内容==" + content + ",级别==" + level + "】";
+        return "Title:" + messageTitle + ", Content:" + messageContent;
     }
 }

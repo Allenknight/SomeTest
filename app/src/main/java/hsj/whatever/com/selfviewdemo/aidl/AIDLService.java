@@ -7,10 +7,10 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
-import hsj.whatever.com.selfviewdemo.IDemandListener;
-import hsj.whatever.com.selfviewdemo.IDemandManager;
+import hsj.whatever.com.selfviewdemo.MessageManager;
 import hsj.whatever.com.selfviewdemo.MessageBean;
 
 /**
@@ -19,84 +19,55 @@ import hsj.whatever.com.selfviewdemo.MessageBean;
 
 public class AIDLService extends Service{
 
-    private static final int WHAT_MSG = 10010;
-    private final String TAG = "qdx";
+    public final String TAG = "AIDL_MESSAGE";
 
-    private RemoteCallbackList<IDemandListener> demandList = new RemoteCallbackList<>();
+    private MessageBean message = new MessageBean();
+
+    private final MessageManager.Stub mMessageManager = new MessageManager.Stub() {
+        @Override
+        public MessageBean getMessage() throws RemoteException {
+            synchronized (this) {
+                Log.e(TAG, "received message is " + message.toString());
+                if (message != null) {
+                    return message;
+                }
+                return new MessageBean();
+            }
+        }
+
+        @Override
+        public void sendMessage(MessageBean msg) throws RemoteException {
+            synchronized (this) {
+                if (message == null) {
+                    message = new MessageBean();
+                }
+                if(msg == null){
+                    Log.e(TAG, "message is null");
+                    msg = new MessageBean();
+                }
+                msg.setMessageContent("Content1");
+                msg.setMessageTitle("Title1");
+                if(message.getMessageTitle() == null){
+                    message = msg;
+                }
+            }
+            Log.e(TAG, "send message is"+ message.toString());
+        }
+    };
 
     @Override
-    public IBinder onBind(Intent intent) {
-        mHandler.sendEmptyMessageDelayed(WHAT_MSG, 3000);
-        return demandManager;
+    public void onCreate() {
+        super.onCreate();
+        MessageBean msg = new MessageBean();
+        msg.setMessageTitle("Title0");
+        msg.setMessageContent("Content0");
+        message = msg;
     }
 
-    IDemandManager.Stub demandManager = new IDemandManager.Stub(){
-        @Override
-        public MessageBean getDemand() throws RemoteException {
-            MessageBean demand = new MessageBean("首先", 1);
-            return demand;
-        }
-
-        @Override
-        public void setDemandIn(MessageBean msg) throws RemoteException {
-            Log.i(TAG, "程序员：" + msg.toString());
-        }
-
-        @Override
-        public void setDemandOut(MessageBean msg) throws RemoteException {
-            Log.i(TAG, "程序员：" + msg.toString()); // msg should be null
-
-            msg.setContent("I dont want to hear , just finish the work before off duty");
-            msg.setLevel(5);
-        }
-
-        @Override
-        public void setDemandInOut(MessageBean msg) throws RemoteException {
-            Log.i(TAG, "程序员：" + msg.toString());
-
-            msg.setContent("把用户交互颜色都改成粉色");
-            msg.setLevel(3);
-        }
-
-        @Override
-        public void registerListener(IDemandListener listener) throws RemoteException {
-            demandList.register(listener);
-        }
-
-        @Override
-        public void unregisterListener(IDemandListener listener) throws RemoteException {
-            demandList.unregister(listener);
-        }
-
-    };
-
-    private int count = 1;
-    private Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            if(demandList != null){
-                int nums = demandList.beginBroadcast();
-                for(int i = 0; i < nums; i++){
-                    MessageBean messageBean = new MessageBean("Throw", count);
-                    count++;
-                    try{
-                        demandList.getBroadcastItem(i).onDemandReciver(messageBean);
-                    }catch (RemoteException e){
-                        e.printStackTrace();
-                    }
-                }
-                demandList.finishBroadcast();
-            }
-
-            mHandler.sendEmptyMessageDelayed(WHAT_MSG, 3000);
-        }
-    };
-
+    @Nullable
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mHandler.removeMessages(WHAT_MSG);
+    public IBinder onBind(Intent intent) {
+        Log.e(getClass().getSimpleName(), String.format("on bind, intent = %s", intent.toString()));
+        return mMessageManager;
     }
 }
