@@ -7,9 +7,12 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.LayoutAnimationController;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import hsj.whatever.com.selfviewdemo.R;
 
@@ -19,12 +22,22 @@ import hsj.whatever.com.selfviewdemo.R;
  */
 
 public class animActivity extends Activity{
-
+    LinearLayout btn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anim);
+        initView();
+    }
+
+    public void initView(){
+        btn = (LinearLayout)findViewById(R.id.ll);
+        ScaleAnimation sa = new ScaleAnimation(0, 1, 0, 1  );
+        sa.setDuration(20000);
+        LayoutAnimationController lac = new LayoutAnimationController(sa, 0.5F);
+        lac.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        btn.setLayoutAnimation(lac);
     }
 
     //透明度变换
@@ -32,6 +45,7 @@ public class animActivity extends Activity{
         AlphaAnimation aa = new AlphaAnimation(0, 1);
         aa.setDuration(1000);
         view.startAnimation(aa);
+        btn.setVisibility(View.GONE);
     }
 
     //旋转
@@ -39,6 +53,7 @@ public class animActivity extends Activity{
         RotateAnimation ra = new RotateAnimation(0, 360, 100, 100);
         ra.setDuration(1000);
         view.startAnimation(ra);
+        btn.setVisibility(View.VISIBLE);
     }
 
     //自身旋转
