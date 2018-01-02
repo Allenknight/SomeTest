@@ -2,6 +2,7 @@ package hsj.whatever.com.selfviewdemo.anim;
 
 import android.app.Activity;
 import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -25,6 +26,9 @@ public class AnimActivity2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anim_2);
         ButterKnife.bind(this);
-        ((Animatable)mImage.getDrawable()).start();
+        Drawable drawable = mImage.getDrawable();
+        if (drawable instanceof Animatable) {
+            ((Animatable) drawable).start();
+        }
     }
 }

@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".anim.AnimActivity2">
+        <activity android:name=".anim.TimeJumpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
