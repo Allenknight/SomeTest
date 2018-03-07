@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActiviy5">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,6 +24,8 @@
             </intent-filter>
         </service>
         <service android:name=".services.FirstService"/>
+
+        <service android:name=".MyIntentService"/>
 
     </application>
 
