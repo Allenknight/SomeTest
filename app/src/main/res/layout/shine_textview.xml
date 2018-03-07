@@ -5,6 +5,7 @@
     tools:context=".MainActivity">
 
     <hsj.whatever.com.selfviewdemo.older.ThirdView
+        android:id="@+id/llll"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:text="My Android TextView"

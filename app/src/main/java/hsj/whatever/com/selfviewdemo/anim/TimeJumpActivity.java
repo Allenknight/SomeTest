@@ -2,10 +2,14 @@ package hsj.whatever.com.selfviewdemo.anim;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +31,8 @@ public class TimeJumpActivity extends Activity {
         setContentView(R.layout.activity_time_jump);
         ButterKnife.bind(this);
 
-
+        ActivityManager mActivityManager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcessInfoList = mActivityManager.getRunningAppProcesses();
     }
 
     @OnClick(R.id.textView)
