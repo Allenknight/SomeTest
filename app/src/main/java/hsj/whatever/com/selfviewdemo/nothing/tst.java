@@ -1,14 +1,20 @@
 package hsj.whatever.com.selfviewdemo.nothing;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.StringTokenizer;
+//import org.apache.http.client.*;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpPost;
 
 /**
  * Created by AllenHan on 2017/11/17.
  */
 
 public class tst {
+
+////    MultipartEntityBuilder
+//    HttpClientBuilder httpClientBuilder = HttpClientBuilder.c
 
     public void main(){
         Permutation("asds", "adsf");
@@ -29,23 +35,47 @@ public class tst {
         for(int i = 0; i < B.length(); i++){
             mList2.add(A.substring(i, i+1));
         }
-        for(int i = 0; i < A.length(); i++){
+
+        Iterator<String> itr = mList.iterator();
+        while(itr.hasNext()){
             int flag = 0;
-            int num = mList2.size();
-            for(int j = 0; j < num; j++){
-                if(mList.get(i).equals(mList2.get(j))){
+            for(int j = 0; j < B.length(); j++){
+                if(itr.next().equals(mList2.get(j))){
                     flag = 1;
-                    mList2.remove(j);
+                    itr.remove();
                     break;
                 }
             }
-            if(flag == 0){
+            if(flag == 0)
                 break;
-            }
             two=two+flag;
         }
         if(two == A.length())
             result = true;
         return result;
+
+//        for(int i = 0; i < A.length(); i++){
+//            int flag = 0;
+//            int num = mList2.size();
+//            for(int j = 0; j < num; j++){
+//                if(mList.get(i).equals(mList2.get(j))){
+//                    flag = 1;
+//                    mList2.remove(j);
+//                    break;
+//                }
+//            }
+//            if(flag == 0){
+//                break;
+//            }
+//            two=two+flag;
+//        }
+//        if(two == A.length())
+//            result = true;
+//        return result;
     }
+
+//    public void mmain()throws JsonGenerationException, JsonMappingException, IOException{
+//
+//    }
+//    ObjectMapper mapper = new ObjectMapper();
 }

@@ -23,6 +23,16 @@ android {
         java.srcDirs = ['src/main/java', 'src/main/aidl']
         }
     }
+//    signingConfigs {
+//        release {
+//            try {
+//                storeFile file("myapp.keystore")
+//            }
+//            catch (ex){
+//                throw new InvalidUserDataException("You should define ")
+//            }
+//        }
+//    }
 }
 
 dependencies {
