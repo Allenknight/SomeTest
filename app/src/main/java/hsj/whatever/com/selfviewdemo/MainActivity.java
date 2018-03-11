@@ -6,7 +6,9 @@ import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewStub;
 
+import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import hsj.whatever.com.selfviewdemo.older.ThirdView;
 
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        setContentView(R.layout.shine_textview);
+        setContentView(R.layout.merge_xml);
 
 //        llll = (ThirdView)findViewById(R.id.llll);
 //        llll.setOnClickListener(new View.OnClickListener() {
@@ -34,15 +36,15 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setData()
-        if(getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null){
-            try {
-                startActivity(intent);
-            }catch (ActivityNotFoundException e){
-
-            }
-        }
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+////        intent.setData()
+//        if(getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null){
+//            try {
+//                startActivity(intent);
+//            }catch (ActivityNotFoundException e){
+//
+//            }
+//        }
 //        findViewById(R.id.second).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -55,4 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
+    public void OnClick(View view) {
+        ((ViewStub)findViewById(R.id.vs_1)).inflate();
+    }
 }
