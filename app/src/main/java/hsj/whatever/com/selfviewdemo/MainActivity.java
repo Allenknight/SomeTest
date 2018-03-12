@@ -3,10 +3,14 @@ package hsj.whatever.com.selfviewdemo;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
+
+import java.io.File;
 
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -59,5 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void OnClick(View view) {
         ((ViewStub)findViewById(R.id.vs_1)).inflate();
+    }
+
+    public File getFiles(String aName){
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), aName);
+        if(!file.mkdirs()){
+            Log.e( "directory", "Directory not created");
+        }
+        return file;
     }
 }
