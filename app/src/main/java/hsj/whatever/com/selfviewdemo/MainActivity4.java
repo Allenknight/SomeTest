@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.LruCache;
 import android.view.MotionEvent;
@@ -66,7 +67,12 @@ public class MainActivity4 extends Activity{
 //                return true;
 //            }
 //        });
-
+        Bitmap bitmap = null;
+        //使用bitmap
+        if(Build.VERSION.SDK_INT <= 10){
+            bitmap.recycle();
+        }
+        bitmap = null;
 
     }
 
