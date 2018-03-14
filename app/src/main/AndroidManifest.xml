@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="hsj.whatever.com.selfviewdemo">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,6 +28,7 @@
         <service android:name=".services.FirstService"/>
 
         <service android:name=".MyIntentService"/>
+        <service android:name=".services.FlashIntentService" />
 
     </application>
 
