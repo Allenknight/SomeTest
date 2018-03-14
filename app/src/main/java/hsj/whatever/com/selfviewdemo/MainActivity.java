@@ -8,6 +8,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -189,6 +192,16 @@ public class MainActivity extends AppCompatActivity {
         }finally {
             //结束事务
             db.endTransaction();
+        }
+    }
+
+    //加载大图片或者一次性多张图片 在异步线程中进行
+    class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap>{
+
+        @Override
+        protected Bitmap doInBackground(Integer... integers) {
+            final Bitmap bitmap = BitmapFactory.decodeFile("some path");
+            return bitmap;
         }
     }
 }
