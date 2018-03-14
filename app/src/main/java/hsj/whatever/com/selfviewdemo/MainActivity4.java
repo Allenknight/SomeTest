@@ -1,7 +1,9 @@
 package hsj.whatever.com.selfviewdemo;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.LruCache;
@@ -97,10 +99,22 @@ public class MainActivity4 extends Activity{
         //图片解码
         @Override
         protected Bitmap doInBackground(Integer... integers) {
-//            final Bitmap bitmap = decodeSampledBitmapFromResource(getResources(), integers[0], 100, 100);
-//            addBitmapToMemoryCache(String.valueOf(integers[0]), bitmap);
-//            return bitmap;
-            return null;
+            final Bitmap bitmap = decodeSampledBitmapFromResource(getResources(), integers[0], 100, 100);
+            addBitmapToMemoryCache(String.valueOf(integers[0]), bitmap);
+            return bitmap;
         }
+    }
+
+    //压缩图片
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight){
+        //首先通过inJustDecodeBounds=true获得图片尺寸
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+        //然后根据图片分辨率以及实际需要的大小，计算压缩率
+//        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        //设置压缩率，解码
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
     }
 }
