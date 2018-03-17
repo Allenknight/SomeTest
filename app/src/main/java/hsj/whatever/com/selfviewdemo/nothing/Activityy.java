@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -30,6 +31,8 @@ import butterknife.internal.Utils;
 import hsj.whatever.com.selfviewdemo.MainActiviy5;
 import hsj.whatever.com.selfviewdemo.R;
 
+import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
+
 /**
  * Created by HSJ on 2018/3/15.
  * Version 1.0
@@ -40,11 +43,15 @@ public class Activityy extends Activity{
     private Animation mAnimation;
 
 
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //禁止录屏
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         mAnimation = AnimationUtils.loadAnimation(this, R.anim.error_frame_in);
         mAnimation.setAnimationListener(new Animation.AnimationListener() {
@@ -122,6 +129,8 @@ public class Activityy extends Activity{
         intent1.setComponent(null);
         intent1.setSelector(null);
         this.startActivityIfNeeded(intent1, -1);
+
+//        getWindow().setFlags(FLAG_SECURE);
 
     }
 
