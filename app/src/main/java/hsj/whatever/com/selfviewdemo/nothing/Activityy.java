@@ -1,11 +1,15 @@
 package hsj.whatever.com.selfviewdemo.nothing;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -13,7 +17,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import java.security.SecureRandom;
+import java.util.concurrent.ThreadLocalRandom;
+
+import javax.crypto.spec.IvParameterSpec;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
 import butterknife.internal.Utils;
+import hsj.whatever.com.selfviewdemo.MainActiviy5;
 import hsj.whatever.com.selfviewdemo.R;
 
 /**
@@ -26,6 +39,7 @@ public class Activityy extends Activity{
     private Animation mAnimation;
 
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +76,41 @@ public class Activityy extends Activity{
                 }
             }
         }, mAnimation.getDuration());
+
+
+        Intent intent = new Intent(this, MainActiviy5.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        try{
+            pendingIntent.send();
+        }catch(PendingIntent.CanceledException e){
+            e.printStackTrace();
+        }
+
+//        IvParameterSpec
+
+        byte[] rand = new byte[16];
+        SecureRandom r = new SecureRandom();
+        r.nextBytes(rand);
+        IvParameterSpec iv = new IvParameterSpec(rand);
+
+        ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+        threadLocalRandom.nextInt(5);
+
+
+        HostnameVerifier hnv = new HostnameVerifier() {
+            @Override
+            public boolean verify(String hostname, SSLSession session) {
+                if("yourhostname".equals(hostname)){
+                    return true;
+                }else{
+                    HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
+                    return hv.verify(hostname, session);
+                }
+
+            }
+        };
+
+
     }
 
 //    public static Bitmap decodeSampledBitmapFromFile(String filename, int reqWidth, int reqHeight, ImageCache cache){
@@ -109,6 +158,8 @@ public class Activityy extends Activity{
             return null;
         }
     }
+
+
 
 }
 
