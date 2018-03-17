@@ -17,6 +17,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import java.net.URISyntaxException;
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -110,6 +111,17 @@ public class Activityy extends Activity{
             }
         };
 
+        Intent intent1 = null;
+        String uri = "asdf";
+        try {
+            intent1 = Intent.parseUri(uri, Intent.URI_INTENT_SCHEME);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        intent1.addCategory("android.intent.category.BROWSABLE");
+        intent1.setComponent(null);
+        intent1.setSelector(null);
+        this.startActivityIfNeeded(intent1, -1);
 
     }
 
