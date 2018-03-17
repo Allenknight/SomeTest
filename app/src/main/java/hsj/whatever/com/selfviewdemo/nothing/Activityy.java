@@ -18,9 +18,19 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.Buffer;
+import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import javax.crypto.spec.IvParameterSpec;
 import javax.net.ssl.HostnameVerifier;
@@ -132,6 +142,46 @@ public class Activityy extends Activity{
 
 //        getWindow().setFlags(FLAG_SECURE);
 
+    }
+
+    public void decompressionZip(){
+//         entry;
+//        String entryName = entry.getName();
+//        if(entryName.contains("..")) {
+//            throw new Exception("unsecurity zipfile!);
+//
+//        } else{
+        
+        int BUFFER = 123;
+        BufferedOutputStream dest = null;
+        try{
+            ZipInputStream zis = new ZipInputStream(new BufferedInputStream(new FileInputStream("/Users/adsf")));
+            ZipEntry entry;
+            while((entry = zis.getNextEntry()) != null){
+                String entryName = entry.getName();
+                if(entryName.contains("..")) throw new Exception("unsecurity zipFile!");
+                int count;
+                byte data[] = new byte[BUFFER];
+                FileOutputStream fos = new FileOutputStream(entryName);
+                //
+                dest = new BufferedOutputStream(fos, BUFFER);
+                while ((count=zis.read(data, 0, BUFFER)) != -1){
+                    dest.write(data, 0, count);
+                }
+                dest.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try{
+                dest.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+//        }
     }
 
 //    public static Bitmap decodeSampledBitmapFromFile(String filename, int reqWidth, int reqHeight, ImageCache cache){
